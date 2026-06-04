@@ -16,7 +16,7 @@ const fs = require('fs');
 const PROVIDER = (process.env.PROVIDER || 'hunter').toLowerCase();
 const API_KEY = process.env.API_KEY;
 const LIMIT = (() => { const i = process.argv.indexOf('--limit'); return i > -1 ? parseInt(process.argv[i + 1]) : Infinity; })();
-const IN = 'venues-nyc-bars.csv', OUT = 'venues-enriched.csv';
+const IN = 'venues-nyc-all.csv', OUT = 'venues-enriched.csv';
 
 if (!API_KEY) { console.error('Set API_KEY (and optionally PROVIDER=hunter|rocketreach|apollo) as env vars first.'); process.exit(1); }
 
