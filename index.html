@@ -3,84 +3,181 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>YourScene — Launch Command Center</title>
+<title>YourScene · Launch Command Center</title>
+<meta name="description" content="YourScene — real-time crowd energy for the World Cup. Launch command center.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
-  :root{ --bg:#0a0e0a; --card:#121712; --line:#1f2a1f; --green:#39ff14; --green2:#27c40f; --txt:#e8f0e8; --mut:#8aa08a; }
-  *{box-sizing:border-box}
-  body{margin:0;background:radial-gradient(1200px 600px at 50% -10%, #11240f 0%, var(--bg) 60%);color:var(--txt);font:16px/1.5 -apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif}
-  .wrap{max-width:1040px;margin:0 auto;padding:32px 20px 80px}
-  header{text-align:center;padding:28px 0 8px}
-  h1{font-size:38px;margin:0;letter-spacing:.5px}
-  h1 .g{color:var(--green);text-shadow:0 0 18px rgba(57,255,20,.45)}
-  .sub{color:var(--mut);margin:8px 0 0}
-  .pill{display:inline-block;margin-top:14px;padding:6px 14px;border:1px solid var(--line);border-radius:999px;color:var(--green);font-size:13px}
-  h2{font-size:14px;text-transform:uppercase;letter-spacing:1.5px;color:var(--mut);margin:38px 0 14px;border-bottom:1px solid var(--line);padding-bottom:8px}
-  .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:12px}
-  a.card{display:block;background:var(--card);border:1px solid var(--line);border-radius:12px;padding:14px 16px;text-decoration:none;color:var(--txt);transition:.15s}
-  a.card:hover{border-color:var(--green2);transform:translateY(-2px);box-shadow:0 8px 24px rgba(0,0,0,.4)}
-  a.card b{display:block;font-size:15px}
-  a.card span{display:block;color:var(--mut);font-size:13px;margin-top:3px}
-  .big{grid-column:span 2}
-  @media(max-width:520px){.big{grid-column:span 1}}
-  footer{margin-top:48px;text-align:center;color:var(--mut);font-size:13px}
-  .tag{font-size:11px;color:var(--green2)}
+  :root{
+    --bg:#070b07; --bg2:#0b110b; --card:rgba(255,255,255,.025); --card-h:rgba(57,255,20,.06);
+    --line:rgba(255,255,255,.08); --line-h:rgba(57,255,20,.45);
+    --green:#39ff14; --green-d:#1f9c0a; --txt:#eaf3ea; --mut:#7d927d; --mut2:#5d6f5d;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{
+    background:var(--bg); color:var(--txt);
+    font-family:Inter,system-ui,sans-serif; -webkit-font-smoothing:antialiased;
+    overflow-x:hidden;
+  }
+  /* ambient background */
+  .bg{position:fixed;inset:0;z-index:-1;
+    background:
+      radial-gradient(900px 520px at 50% -8%, rgba(57,255,20,.16), transparent 62%),
+      radial-gradient(700px 700px at 88% 12%, rgba(31,156,10,.10), transparent 60%),
+      radial-gradient(600px 600px at 6% 30%, rgba(57,255,20,.06), transparent 60%),
+      linear-gradient(180deg, var(--bg2), var(--bg));
+  }
+  .bg:after{content:"";position:absolute;inset:0;opacity:.5;
+    background-image:linear-gradient(rgba(255,255,255,.018) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.018) 1px,transparent 1px);
+    background-size:64px 64px;mask-image:radial-gradient(circle at 50% 20%,#000,transparent 80%)}
+  .wrap{max-width:1120px;margin:0 auto;padding:0 24px}
+
+  /* nav */
+  nav{position:sticky;top:0;z-index:10;backdrop-filter:blur(14px);
+    background:linear-gradient(180deg,rgba(7,11,7,.85),rgba(7,11,7,.35));
+    border-bottom:1px solid var(--line)}
+  .nav-in{display:flex;align-items:center;justify-content:space-between;height:62px}
+  .brand{display:flex;align-items:center;gap:10px;font-family:Space Grotesk;font-weight:700;letter-spacing:.3px;font-size:18px}
+  .dot{width:10px;height:10px;border-radius:50%;background:var(--green);box-shadow:0 0 14px var(--green);animation:pulse 2s infinite}
+  @keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.5;transform:scale(.78)}}
+  .nav-links{display:flex;gap:6px}
+  .nav-links a{color:var(--mut);text-decoration:none;font-size:13.5px;font-weight:500;padding:8px 12px;border-radius:8px;transition:.15s}
+  .nav-links a:hover{color:var(--txt);background:var(--card-h)}
+  @media(max-width:680px){.nav-links{display:none}}
+
+  /* hero */
+  header{padding:84px 0 30px;text-align:center}
+  .eyebrow{display:inline-flex;align-items:center;gap:8px;font-size:12px;letter-spacing:2px;text-transform:uppercase;color:var(--green);
+    border:1px solid var(--line-h);background:var(--card-h);padding:7px 16px;border-radius:999px;margin-bottom:26px;animation:fade .8s both}
+  h1{font-family:Space Grotesk;font-weight:700;font-size:clamp(40px,7vw,78px);line-height:1.02;letter-spacing:-1.5px;animation:fade .8s .05s both}
+  h1 .g{background:linear-gradient(180deg,#bfffb0,var(--green) 55%,var(--green-d));-webkit-background-clip:text;background-clip:text;color:transparent}
+  .lede{color:var(--mut);font-size:clamp(15px,2.2vw,19px);margin:22px auto 0;max-width:560px;animation:fade .8s .12s both}
+  .cta-row{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin-top:34px;animation:fade .8s .18s both}
+  .btn{display:inline-flex;align-items:center;gap:8px;font-weight:600;font-size:14.5px;text-decoration:none;padding:13px 22px;border-radius:11px;transition:.18s}
+  .btn-p{background:var(--green);color:#04210a;box-shadow:0 6px 26px rgba(57,255,20,.32)}
+  .btn-p:hover{transform:translateY(-2px);box-shadow:0 10px 34px rgba(57,255,20,.45)}
+  .btn-s{border:1px solid var(--line);color:var(--txt)}
+  .btn-s:hover{border-color:var(--line-h);background:var(--card-h)}
+  @keyframes fade{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+
+  /* stat strip */
+  .stats{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin:44px 0 8px;animation:fade .8s .24s both}
+  .stat{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:18px;text-align:center}
+  .stat b{display:block;font-family:Space Grotesk;font-size:30px;color:var(--green)}
+  .stat span{color:var(--mut);font-size:12.5px}
+  @media(max-width:680px){.stats{grid-template-columns:repeat(2,1fr)}}
+
+  /* sections */
+  section{padding:46px 0 4px}
+  .sec-head{display:flex;align-items:baseline;gap:14px;margin-bottom:20px}
+  .sec-head h2{font-family:Space Grotesk;font-weight:600;font-size:22px;letter-spacing:-.3px}
+  .sec-head .num{font-size:12px;color:var(--mut2);font-family:Space Grotesk}
+  .sec-head .ln{flex:1;height:1px;background:var(--line)}
+  .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(252px,1fr));gap:14px}
+  a.card{position:relative;display:block;background:var(--card);border:1px solid var(--line);border-radius:15px;padding:18px;text-decoration:none;color:var(--txt);overflow:hidden;transition:.18s}
+  a.card:before{content:"";position:absolute;inset:0;background:radial-gradient(420px 160px at var(--mx,50%) -40%,rgba(57,255,20,.14),transparent 70%);opacity:0;transition:.25s}
+  a.card:hover{border-color:var(--line-h);transform:translateY(-3px)}
+  a.card:hover:before{opacity:1}
+  a.card .ico{font-size:18px;margin-bottom:10px}
+  a.card b{display:block;font-family:Space Grotesk;font-weight:600;font-size:15.5px}
+  a.card p{color:var(--mut);font-size:13px;margin-top:4px}
+  a.card .tag{display:inline-block;margin-top:10px;font-size:10.5px;letter-spacing:1px;text-transform:uppercase;color:var(--green-d);border:1px solid var(--line);padding:3px 8px;border-radius:6px}
+  .big{grid-column:span 2}@media(max-width:560px){.big{grid-column:span 1}}
+  .arrow{position:absolute;top:18px;right:18px;color:var(--mut2);transition:.2s}
+  a.card:hover .arrow{color:var(--green);transform:translate(2px,-2px)}
+
+  footer{margin:70px 0 50px;padding-top:26px;border-top:1px solid var(--line);text-align:center;color:var(--mut2);font-size:13px}
+  footer a{color:var(--mut)}
 </style>
 </head>
 <body>
-<div class="wrap">
-  <header>
-    <h1>YourScene — <span class="g">Launch Command Center</span></h1>
-    <p class="sub">Feel the crowd. Find your scene. · World Cup 2026 launch — June 11</p>
-    <span class="pill">● Everything we built, one click away</span>
-  </header>
+<div class="bg"></div>
 
-  <h2>Start here</h2>
-  <div class="grid">
-    <a class="card big" href="https://github.com/anthonyharding6-gif/yourscene-marketing/blob/main/outputs/exec/launch-checklist.md"><b>✅ One-Page Launch Checklist</b><span>Your daily driver — work it top to bottom</span></a>
-    <a class="card" href="https://yourscene.netlify.app/"><b>🟢 Live Site / Waitlist</b><span>yourscene.netlify.app</span></a>
-    <a class="card" href="https://drive.google.com/drive/folders/1Z7Ttadn-dlaVqVV2EJ2OCmR62F47s5eU"><b>📁 Google Drive folder</b><span>Summaries + kit (phone-friendly)</span></a>
+<nav><div class="wrap nav-in">
+  <div class="brand"><span class="dot"></span> YourScene</div>
+  <div class="nav-links">
+    <a href="#start">Start</a><a href="#exec">Execute</a><a href="#strategy">Strategy</a><a href="#dev">Dev</a><a href="https://github.com/anthonyharding6-gif/yourscene-marketing">Repo</a>
   </div>
+</div></nav>
 
-  <h2>Execution — ready to use</h2>
-  <div class="grid">
-    <a class="card" href="https://github.com/anthonyharding6-gif/yourscene-marketing/blob/main/outputs/exec/today-social-pack.md"><b>Today's Social Pack</b><span>Exact posts + UTM links</span></a>
-    <a class="card" href="https://github.com/anthonyharding6-gif/yourscene-marketing/blob/main/outputs/exec/launch-day-run-of-show.md"><b>Launch-Day Run-of-Show</b><span>Hour-by-hour, June 11</span></a>
-    <a class="card" href="https://github.com/anthonyharding6-gif/yourscene-marketing/blob/main/outputs/exec/canva-designs.md"><b>Canva Designs Index</b><span>12 graphics — edit links</span></a>
-    <a class="card" href="https://github.com/anthonyharding6-gif/yourscene-marketing/blob/main/marketing-kit/06-posting-schedule.md"><b>Posting Schedule</b><span>Jun 3 → 11, dated</span></a>
-    <a class="card" href="https://github.com/anthonyharding6-gif/yourscene-marketing/blob/main/marketing-kit/05-venue-outreach-batch.md"><b>20 Venue Messages</b><span>Personalized, ready to DM</span></a>
-    <a class="card" href="https://github.com/anthonyharding6-gif/yourscene-marketing/blob/main/outputs/08-cold-email-sequences.md"><b>Cold-Email Sequences</b><span>5-touch, venues/creators/communities</span></a>
+<header class="wrap">
+  <span class="eyebrow"><span class="dot"></span> Launch Command Center</span>
+  <h1>Feel the crowd.<br><span class="g">Find your scene.</span></h1>
+  <p class="lede">Real-time crowd energy for the World Cup. Everything built for the June 11 launch — one click away.</p>
+  <div class="cta-row">
+    <a class="btn btn-p" href="https://github.com/anthonyharding6-gif/yourscene-marketing/blob/main/outputs/exec/launch-checklist.md">▸ Open the daily checklist</a>
+    <a class="btn btn-s" href="https://yourscene.netlify.app/">View live site ↗</a>
   </div>
-
-  <h2>Strategy — 14 skills applied</h2>
-  <div class="grid">
-    <a class="card" href="https://github.com/anthonyharding6-gif/yourscene-marketing/blob/main/outputs/01-marketing-plan.md"><b>Marketing Plan</b><span class="tag">AARRR</span></a>
-    <a class="card" href="https://github.com/anthonyharding6-gif/yourscene-marketing/blob/main/outputs/02-launch-plan.md"><b>Launch Plan</b><span class="tag">ORB</span></a>
-    <a class="card" href="https://github.com/anthonyharding6-gif/yourscene-marketing/blob/main/outputs/03-landing-cro-and-copy.md"><b>Landing CRO + Copy</b><span class="tag">cro</span></a>
-    <a class="card" href="https://github.com/anthonyharding6-gif/yourscene-marketing/blob/main/outputs/04-aso-app-store-listing.md"><b>App Store Listing</b><span class="tag">aso</span></a>
-    <a class="card" href="https://github.com/anthonyharding6-gif/yourscene-marketing/blob/main/outputs/05-referrals-and-community.md"><b>Referrals + Community</b><span class="tag">referrals</span></a>
-    <a class="card" href="https://github.com/anthonyharding6-gif/yourscene-marketing/blob/main/outputs/06-ai-seo.md"><b>AI-SEO</b><span class="tag">AEO/GEO</span></a>
-    <a class="card" href="https://github.com/anthonyharding6-gif/yourscene-marketing/blob/main/outputs/07-programmatic-seo.md"><b>Programmatic SEO</b><span class="tag">~60 pages</span></a>
-    <a class="card" href="https://github.com/anthonyharding6-gif/yourscene-marketing/blob/main/outputs/09-onboarding.md"><b>Onboarding</b><span class="tag">activation</span></a>
-    <a class="card" href="https://github.com/anthonyharding6-gif/yourscene-marketing/blob/main/outputs/10-analytics-tracking-plan.md"><b>Analytics Plan</b><span class="tag">GA4 + PostHog</span></a>
-    <a class="card" href="https://github.com/anthonyharding6-gif/yourscene-marketing/blob/main/outputs/11-email-sequences.md"><b>Email Sequences</b><span class="tag">lifecycle</span></a>
-    <a class="card" href="https://github.com/anthonyharding6-gif/yourscene-marketing/blob/main/outputs/12-social-strategy.md"><b>Social Strategy</b><span class="tag">repurposing</span></a>
-    <a class="card" href="https://github.com/anthonyharding6-gif/yourscene-marketing/blob/main/outputs/13-co-marketing.md"><b>Co-Marketing</b><span class="tag">Harbor #1</span></a>
+  <div class="stats">
+    <div class="stat"><b>14</b><span>skills applied</span></div>
+    <div class="stat"><b>20</b><span>NYC venues mapped</span></div>
+    <div class="stat"><b>12</b><span>launch graphics</span></div>
+    <div class="stat"><b>Jun 11</b><span>kickoff</span></div>
   </div>
+</header>
 
-  <h2>Dev hand-off (deploy to the app/site)</h2>
-  <div class="grid">
-    <a class="card" href="https://github.com/anthonyharding6-gif/yourscene-marketing/blob/main/outputs/content/where-to-watch-world-cup-nyc.md"><b>Flagship SEO Article</b><span>Publish at /where-to-watch-world-cup-nyc</span></a>
-    <a class="card" href="https://github.com/anthonyharding6-gif/yourscene-marketing/tree/main/outputs/site-assets"><b>Site Assets</b><span>llms.txt, robots.txt fix, schema</span></a>
-    <a class="card" href="https://github.com/anthonyharding6-gif/yourscene-marketing/blob/main/outputs/data/venues.csv"><b>Venues Dataset</b><span>Powers the pSEO pages</span></a>
-  </div>
+<main class="wrap">
 
-  <h2>The kit + the 43 skills</h2>
-  <div class="grid">
-    <a class="card big" href="https://github.com/anthonyharding6-gif/yourscene-marketing"><b>📦 Full GitHub Repo</b><span>All docs + 43 marketing skills (run them in Claude Code)</span></a>
-    <a class="card" href="https://github.com/anthonyharding6-gif/yourscene-marketing/blob/main/marketing-kit/COVERAGE.md"><b>Coverage Map</b><span>Every deck item → its doc</span></a>
-  </div>
+  <section id="start">
+    <div class="sec-head"><span class="num">01</span><h2>Start here</h2><span class="ln"></span></div>
+    <div class="grid">
+      <a class="card big" href="https://github.com/anthonyharding6-gif/yourscene-marketing/blob/main/outputs/exec/launch-checklist.md"><span class="arrow">↗</span><div class="ico">✅</div><b>One-Page Launch Checklist</b><p>Your daily driver — work it top to bottom.</p></a>
+      <a class="card" href="https://drive.google.com/drive/folders/1Z7Ttadn-dlaVqVV2EJ2OCmR62F47s5eU"><span class="arrow">↗</span><div class="ico">📁</div><b>Google Drive</b><p>Summaries + kit, phone-friendly.</p></a>
+    </div>
+  </section>
 
-  <footer>YourScene · built June 2026 · this dashboard auto-updates from the GitHub repo</footer>
-</div>
+  <section id="exec">
+    <div class="sec-head"><span class="num">02</span><h2>Execute — ready to use</h2><span class="ln"></span></div>
+    <div class="grid">
+      <a class="card" href="https://github.com/anthonyharding6-gif/yourscene-marketing/blob/main/outputs/exec/today-social-pack.md"><span class="arrow">↗</span><div class="ico">📣</div><b>Today's Social Pack</b><p>Exact posts + UTM links.</p></a>
+      <a class="card" href="https://github.com/anthonyharding6-gif/yourscene-marketing/blob/main/outputs/exec/launch-day-run-of-show.md"><span class="arrow">↗</span><div class="ico">🚀</div><b>Launch-Day Run-of-Show</b><p>Hour-by-hour, June 11.</p></a>
+      <a class="card" href="https://github.com/anthonyharding6-gif/yourscene-marketing/blob/main/outputs/exec/canva-designs.md"><span class="arrow">↗</span><div class="ico">🎨</div><b>Design Index</b><p>12 graphics — edit links.</p></a>
+      <a class="card" href="https://github.com/anthonyharding6-gif/yourscene-marketing/blob/main/marketing-kit/05-venue-outreach-batch.md"><span class="arrow">↗</span><div class="ico">📨</div><b>20 Venue Messages</b><p>Personalized, ready to send.</p></a>
+      <a class="card" href="https://github.com/anthonyharding6-gif/yourscene-marketing/blob/main/outputs/08-cold-email-sequences.md"><span class="arrow">↗</span><div class="ico">✉️</div><b>Cold-Email Sequences</b><p>5-touch: venues, creators, communities.</p></a>
+      <a class="card" href="https://github.com/anthonyharding6-gif/yourscene-marketing/blob/main/marketing-kit/06-posting-schedule.md"><span class="arrow">↗</span><div class="ico">🗓️</div><b>Posting Schedule</b><p>Jun 3 → 11, dated.</p></a>
+    </div>
+  </section>
+
+  <section id="strategy">
+    <div class="sec-head"><span class="num">03</span><h2>Strategy — 14 skills applied</h2><span class="ln"></span></div>
+    <div class="grid">
+      <a class="card" href="https://github.com/anthonyharding6-gif/yourscene-marketing/blob/main/outputs/01-marketing-plan.md"><span class="arrow">↗</span><b>Marketing Plan</b><span class="tag">AARRR</span></a>
+      <a class="card" href="https://github.com/anthonyharding6-gif/yourscene-marketing/blob/main/outputs/02-launch-plan.md"><span class="arrow">↗</span><b>Launch Plan</b><span class="tag">ORB</span></a>
+      <a class="card" href="https://github.com/anthonyharding6-gif/yourscene-marketing/blob/main/outputs/03-landing-cro-and-copy.md"><span class="arrow">↗</span><b>Landing CRO + Copy</b><span class="tag">cro</span></a>
+      <a class="card" href="https://github.com/anthonyharding6-gif/yourscene-marketing/blob/main/outputs/04-aso-app-store-listing.md"><span class="arrow">↗</span><b>App Store Listing</b><span class="tag">aso</span></a>
+      <a class="card" href="https://github.com/anthonyharding6-gif/yourscene-marketing/blob/main/outputs/06-ai-seo.md"><span class="arrow">↗</span><b>AI-SEO</b><span class="tag">AEO / GEO</span></a>
+      <a class="card" href="https://github.com/anthonyharding6-gif/yourscene-marketing/blob/main/outputs/07-programmatic-seo.md"><span class="arrow">↗</span><b>Programmatic SEO</b><span class="tag">~60 pages</span></a>
+      <a class="card" href="https://github.com/anthonyharding6-gif/yourscene-marketing/blob/main/outputs/09-onboarding.md"><span class="arrow">↗</span><b>Onboarding</b><span class="tag">activation</span></a>
+      <a class="card" href="https://github.com/anthonyharding6-gif/yourscene-marketing/blob/main/outputs/10-analytics-tracking-plan.md"><span class="arrow">↗</span><b>Analytics</b><span class="tag">GA4 · PostHog</span></a>
+      <a class="card" href="https://github.com/anthonyharding6-gif/yourscene-marketing/blob/main/outputs/11-email-sequences.md"><span class="arrow">↗</span><b>Email Lifecycle</b><span class="tag">drip</span></a>
+      <a class="card" href="https://github.com/anthonyharding6-gif/yourscene-marketing/blob/main/outputs/12-social-strategy.md"><span class="arrow">↗</span><b>Social Strategy</b><span class="tag">repurposing</span></a>
+      <a class="card" href="https://github.com/anthonyharding6-gif/yourscene-marketing/blob/main/outputs/13-co-marketing.md"><span class="arrow">↗</span><b>Co-Marketing</b><span class="tag">Harbor #1</span></a>
+      <a class="card" href="https://github.com/anthonyharding6-gif/yourscene-marketing/blob/main/outputs/05-referrals-and-community.md"><span class="arrow">↗</span><b>Referrals</b><span class="tag">loops</span></a>
+    </div>
+  </section>
+
+  <section id="dev">
+    <div class="sec-head"><span class="num">04</span><h2>Dev hand-off</h2><span class="ln"></span></div>
+    <div class="grid">
+      <a class="card" href="https://github.com/anthonyharding6-gif/yourscene-marketing/blob/main/outputs/content/where-to-watch-world-cup-nyc.md"><span class="arrow">↗</span><div class="ico">📄</div><b>Flagship SEO Article</b><p>Publish at /where-to-watch-world-cup-nyc.</p></a>
+      <a class="card" href="https://github.com/anthonyharding6-gif/yourscene-marketing/tree/main/outputs/site-assets"><span class="arrow">↗</span><div class="ico">⚙️</div><b>Site Assets</b><p>llms.txt · robots.txt fix · schema.</p></a>
+      <a class="card" href="https://github.com/anthonyharding6-gif/yourscene-marketing/blob/main/outputs/data/venues.csv"><span class="arrow">↗</span><div class="ico">🗂️</div><b>Venues Dataset</b><p>Powers the pSEO pages.</p></a>
+      <a class="card big" href="https://github.com/anthonyharding6-gif/yourscene-marketing"><span class="arrow">↗</span><div class="ico">📦</div><b>Full Repo + 43 Marketing Skills</b><p>Open in Claude Code to run any skill on demand.</p></a>
+    </div>
+  </section>
+
+</main>
+
+<footer class="wrap">
+  Feel the crowd. Find your scene. · Built June 2026 · auto-updates from the <a href="https://github.com/anthonyharding6-gif/yourscene-marketing">GitHub repo</a>
+</footer>
+
+<script>
+  document.querySelectorAll('a.card').forEach(c=>{
+    c.addEventListener('pointermove',e=>{const r=c.getBoundingClientRect();c.style.setProperty('--mx',(e.clientX-r.left)+'px')});
+  });
+</script>
 </body>
 </html>
