@@ -1,0 +1,15 @@
+# OS / editor
+.DS_Store
+Thumbs.db
+*.swp
+.vscode/
+.idea/
+
+# Secrets — never commit
+.env
+.env.*
+*.key
+
+# Private — third-party contact info, kept local only (NOT for public repo)
+private/
+marketing-kit/04-tracker.csv

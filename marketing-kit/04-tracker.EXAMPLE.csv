@@ -1,0 +1,6 @@
+Date,Type,Name,Channel,Contact,Status,Last Action,Next Step,Notes
+# The live tracker (04-tracker.csv) contains real contact info and is kept private (gitignored).
+# This example shows the column structure only. Statuses: To contact / Draft ready / Contacted / Interested / Listed.
+2026-06-XX,Venue,Example Bar,IG DM,@examplebar,To contact,,Send batch msg,Neighborhood + hook
+2026-06-XX,Influencer,Example Creator,Email/IG,(private),To contact,,Send script #5,Reach
+2026-06-XX,Community,Example Org,Email,(private),To contact,,Send script #6,Country/angle
