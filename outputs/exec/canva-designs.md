@@ -9,6 +9,7 @@
 | **"8 DAYS" countdown** | Today's countdown post (`exec/today-social-pack.md`) | https://www.canva.com/d/jHOpCQqqcYM-aol |
 | **Where to Watch the World Cup in NYC** | Promote the guide + venues; pairs with the `ai-seo` flagship page | https://www.canva.com/d/rlNw7E6VGQthwjW |
 | **Venue Spotlight (reusable template)** | Drop in a venue photo + name as venues confirm (fills Reels 5-7 + spotlight posts) | https://www.canva.com/d/l52dgrsquKB7DTc |
+| **Pick Your Country (IG Story template)** | Daily engagement Story — add an IG poll sticker over the open center (Reel 4 / `marketing-kit/02` story idea) | https://www.canva.com/d/7h0uEQDoo5W9Tvc |
 
 ## Full countdown set (8→1) — built Jun 3, all in your Canva
 Post one per day, Jun 3 → Jun 10, per `marketing-kit/06-posting-schedule`.
