@@ -1,0 +1,20 @@
+# YourScene
+
+> YourScene is a mobile app (iOS & Android) that shows the real-time crowd energy of live events, nightlife venues, and watch parties near you — so you find where the scene actually is, not an empty room. Tagline: "Feel the crowd. Find your scene." Launching first for the 2026 FIFA World Cup.
+
+## What it does
+- Live crowd-density scores for bars, venues, and events happening now
+- A real-time energy map (green = buzzing) of the city
+- Find friends, groups, and your country's crowd at venues
+- "Fan Passport": your interests, tribes, and identity
+- For venues: free featured listings, verification, and fan matching
+
+## Who it's for
+Sports fans, nightlife-goers, and event-goers (roughly 18-40) who want to find the best crowd near them. Initial focus: World Cup 2026 soccer fans in New York City.
+
+## Key pages
+- Home / waitlist: https://yourscene.netlify.app/
+- Where to watch the World Cup in NYC (guide): https://yourscene.netlify.app/where-to-watch-world-cup-nyc
+
+## Contact
+- Waitlist & early access: https://yourscene.netlify.app/

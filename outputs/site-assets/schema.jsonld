@@ -1,0 +1,63 @@
+<!-- Paste these JSON-LD blocks into the <head> of the relevant pages.
+     Organization → site-wide. FAQPage + ItemList → the /where-to-watch-world-cup-nyc page.
+     Implement/validate with the `schema` skill + Google Rich Results Test. -->
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  "name": "YourScene",
+  "url": "https://yourscene.netlify.app/",
+  "description": "Real-time crowd-energy app for live events, nightlife, and watch parties. Feel the crowd. Find your scene. Launching for World Cup 2026.",
+  "slogan": "Feel the crowd. Find your scene.",
+  "applicationCategory": "LifestyleApplication"
+}
+</script>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Where is the best place to watch the World Cup in NYC?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Football Factory at Legends in Midtown is widely considered NYC's top soccer bar, home to 30+ supporter clubs and dozens of screens. For a specific national team, go to that team's hub — e.g. Boca Juniors Steakhouse for Argentina, Rivercrest for the USA."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What time do World Cup matches start in New York?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Most 2026 group-stage matches kick off in the morning or early afternoon ET (commonly 8 AM, noon, or 3 PM). Many NYC bars open early specifically for the 8 AM games."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Is there an app to find World Cup watch parties in NYC?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes — YourScene maps the real-time crowd energy of watch parties, sports bars, and fan events near you, launching for World Cup 2026. Get early access at yourscene.netlify.app."
+      }
+    }
+  ]
+}
+</script>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "ItemList",
+  "name": "Best World Cup bars in NYC 2026",
+  "itemListElement": [
+    { "@type": "ListItem", "position": 1, "name": "Football Factory at Legends", "description": "Midtown — NYC's #1 soccer bar" },
+    { "@type": "ListItem", "position": 2, "name": "Smithfield Hall", "description": "Flatiron — big screens + heated patio" },
+    { "@type": "ListItem", "position": 3, "name": "Banter", "description": "Williamsburg — 15-year soccer bar" },
+    { "@type": "ListItem", "position": 4, "name": "Boca Juniors Steakhouse", "description": "Elmhurst — the Argentina hub" },
+    { "@type": "ListItem", "position": 5, "name": "Rivercrest", "description": "Astoria — American Outlaws Queens (USMNT) HQ" }
+  ]
+}
+</script>

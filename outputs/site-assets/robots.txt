@@ -1,0 +1,29 @@
+# YourScene robots.txt — allow general + AI search crawlers, fix sitemap domain
+# Replace https://yourscene.netlify.app with your final/custom domain if different.
+
+User-agent: *
+Allow: /
+Disallow: /api/
+
+# AI search & answer engines (explicitly welcomed so they can cite YourScene)
+User-agent: GPTBot
+Allow: /
+User-agent: ChatGPT-User
+Allow: /
+User-agent: OAI-SearchBot
+Allow: /
+User-agent: PerplexityBot
+Allow: /
+User-agent: ClaudeBot
+Allow: /
+User-agent: anthropic-ai
+Allow: /
+User-agent: Google-Extended
+Allow: /
+
+# Optional: block training-only crawler while still allowing search-and-cite bots above
+User-agent: CCBot
+Disallow: /
+
+# FIX: sitemap must point to THIS site's real domain (was pointing to yourspace-waitlist...)
+Sitemap: https://yourscene.netlify.app/sitemap.xml
