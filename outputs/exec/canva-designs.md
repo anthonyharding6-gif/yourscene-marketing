@@ -24,7 +24,9 @@ Post one per day, Jun 3 → Jun 10, per `marketing-kit/06-posting-schedule`.
 | 2 DAYS | Jun 9 | https://www.canva.com/d/EqFH20P8s_mS8mr |
 | 1 DAY | Jun 10 | https://www.canva.com/d/pKaCIC2sZ_myLji |
 
-(Launch day Jun 11 uses the "KICKOFF" post, not a countdown.)
+| **KICKOFF** | **Jun 11 (LAUNCH)** | https://www.canva.com/d/2UV9lFq12MtCp22 |
+
+The KICKOFF post completes the series — pair it with the launch-day copy in `exec/launch-day-run-of-show.md` ("KICKOFF DAY. The World Cup is HERE in NYC...").
 
 ## Next designs to generate (just ask)
 - Daily countdown variants (7→1 days) as a set
