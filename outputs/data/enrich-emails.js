@@ -34,9 +34,12 @@ const sleep = ms => new Promise(r => setTimeout(r, ms));
 
 // --- providers ---
 async function hunter(domain) {
-  const r = await fetch(`https://api.hunter.io/v2/domain-search?domain=${domain}&api_key=${API_KEY}&limit=5`);
+  const r = await fetch(`https://api.hunter.io/v2/domain-search?domain=${domain}&api_key=${API_KEY}&limit=10`);
   const j = await r.json();
-  return (j.data?.emails || []).map(e => ({ email: e.value, name: [e.first_name, e.last_name].filter(Boolean).join(' '), title: e.position || '', conf: e.confidence }));
+  return (j.data?.emails || [])
+    .map(e => ({ email: e.value, name: [e.first_name, e.last_name].filter(Boolean).join(' '), title: e.position || '', conf: e.confidence, type: e.type /* personal | generic */ }))
+    // named/personal emails first so the real contacts (not info@) surface at the top
+    .sort((a, b) => (a.type === 'personal' ? 0 : 1) - (b.type === 'personal' ? 0 : 1));
 }
 async function rocketreach(domain) {
   const r = await fetch('https://api.rocketreach.co/api/v2/person/search', {
@@ -63,16 +66,16 @@ if (!lookup) { console.error('PROVIDER must be hunter, rocketreach, or apollo');
   const targets = venues.filter(v => { const d = domainOf(v.website); if (!d || seenDom.has(d)) return false; seenDom.add(d); return true; }).slice(0, LIMIT);
   console.log(`${PROVIDER}: enriching ${targets.length} domains...`);
   const esc = s => '"' + String(s || '').replace(/"/g, '""') + '"';
-  fs.writeFileSync(OUT, 'venue,domain,contact_name,title,email,confidence\n');
-  let found = 0;
+  fs.writeFileSync(OUT, 'venue,domain,contact_name,title,email,type,confidence\n');
+  let found = 0, named = 0;
   for (let i = 0; i < targets.length; i++) {
     const v = targets[i], d = domainOf(v.website);
     try {
       const people = await lookup(d);
-      for (const p of people) { if (!p.email) continue; found++; fs.appendFileSync(OUT, [v.name, d, p.name, p.title, p.email, p.conf].map(esc).join(',') + '\n'); }
+      for (const p of people) { if (!p.email) continue; found++; if (p.type === 'personal' || p.name) named++; fs.appendFileSync(OUT, [v.name, d, p.name, p.title, p.email, p.type || '', p.conf].map(esc).join(',') + '\n'); }
       if ((i + 1) % 25 === 0) console.log(`  ${i + 1}/${targets.length} · ${found} emails so far`);
     } catch (e) { console.error('  err', d, e.message); }
     await sleep(1100); // be polite / respect rate limits
   }
-  console.log(`DONE — ${found} real emails written to ${OUT}`);
+  console.log(`DONE — ${found} emails (${named} named/personal) written to ${OUT}`);
 })();
